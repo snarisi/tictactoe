@@ -1,0 +1,14 @@
+body {
+  text-align: center;
+}
+
+.space {
+  height: 100px;
+  width: 100px;
+  border: solid 1px black;
+}
+
+#gameboard {
+  margin: 50px auto;
+  width: 300px;
+}

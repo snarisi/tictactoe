@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+  </head>
+  
+  <body ng-app="app">
+    
+    <div ng-controller="GameCtrl">
+      
+      <div ng-show="chooseSymbol">
+        <h3>Choose your symbol</h3>
+        <p><span ng-click="chooseX()">X  </span><span ng-click="chooseO()">  O</span>
+      </div>
+      
+      <div id="gameboard" class="container center-block">
+        <div class="row boardRow" ng-repeat="row in grid" ng-init="x = $index">
+          <div class="col-xs-4 space" ng-repeat="square in row track by $index" ng-click="claimForHuman(x, $index)">
+            {{square}}
+          </div>
+        </div>
+      </div>
+    
+      <div class="announcement" ng-show="winner === 'human'">
+        Human Wins
+      </div>
+
+      <div class="announcement" ng-show="winner === 'computer'">
+        Computer Wins
+      </div>
+
+      <div class="announcement" ng-show="winner === 'draw'">
+        Draw
+      </div>
+      
+      <div ng-show="playAgain">
+        <h3>Play again?</h3>
+        <p><span ng-click="chooseYourSymbol()">Yes  </span><span ng-click="playAgain = false">  No</span></p>
+      </div>
+    </div>
+    
+  </body>
+
+</html>
