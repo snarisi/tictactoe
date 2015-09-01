@@ -1,46 +1,50 @@
+/*global angular*/
 (function () {
   "use strict";
   
-  var app = angular.module('app', []);
+  var app = angular.module('app', ["gameLogic"]);
   
-  app.controller("GameCtrl", ["$scope", "$timeout",
-    function ($scope, $timeout) {
+  app.controller("GameCtrl", ["$scope", "$timeout", "game",
+    function ($scope, $timeout, game) {
+
+      function checkForWinner() {
+        if (game.gameOver() !== false) {
+          $scope.winner = game.gameOver();
+          $scope.playAgain = true;
+        }
+      }
+      
+      function humanTurn() {
+        checkForWinner();
+        if (!$scope.winner) {
+          $scope.humansTurn = true;
+        }
+      }
+      
+      function computerTurn() {
+        checkForWinner();
+        if (!$scope.winner) {
+          $timeout(function () {game.computerMove(); }, 500).
+            then(function () {humanTurn(); });
+        }
+      }
+      
+      $scope.claimForHuman = function (x, y) {
+        if ($scope.humansTurn) {
+          if (game.getGridVal([x, y]) === " ") {
+            game.setGridVal([x, y], game.humanSymbol);
+            $scope.humansTurn = false;
+            computerTurn();
+          }
+        }
+      };
+
       function playGame() {
-        initialize();
-        $scope.grid = grid;
+        game.initialize();
+        $scope.grid = game.getGrid();
         $scope.winner = false;
         if ($scope.humansTurn === false) {
           computerTurn();
-        }
-
-        function computerTurn() {
-          checkForWinner();
-          if (gameOver() === false) {
-            $timeout(function () {computerMove(); }, 500).
-              then(function () {humanTurn(); });
-          }
-        }
-
-        $scope.claimForHuman = function (x, y) {
-          if ($scope.humansTurn) {
-            if (grid[x][y] === " ") {
-              grid[x][y] = humanSymbol;
-              $scope.humansTurn = false;
-              computerTurn();
-            }
-          }
-        };
-
-        function humanTurn() {
-          checkForWinner();
-          $scope.humansTurn = true;
-        }
-
-        function checkForWinner() {
-          if (gameOver() !== false) {
-            $scope.winner = gameOver();
-            $scope.playAgain = true;
-          }
         }
       }
       
@@ -50,23 +54,22 @@
       };
       
       $scope.chooseX = function () {
-        humanSymbol = "X";
-        computerSymbol = "O";
+        game.humanSymbol = "X";
+        game.computerSymbol = "O";
         $scope.humansTurn = true;
         $scope.chooseSymbol = false;
         playGame();
       };
       
       $scope.chooseO = function () {
-        humanSymbol = "O";
-        computerSymbol = "X";
+        game.humanSymbol = "O";
+        game.computerSymbol = "X";
         $scope.humansTurn = false;
         $scope.chooseSymbol = false;
         playGame();
       };
       
       $scope.chooseYourSymbol();
-      
     }]);
   
 }());
