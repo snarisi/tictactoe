@@ -105,6 +105,10 @@ h3 {
   from {
     top: -200px;
   }
+  
+  50% {
+    top: 20px;
+  }
   to {
     top: 5px;
   }
