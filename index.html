@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="game.js"></script>
   </head>
@@ -29,7 +30,7 @@
       <div id="gameboard">
         <div class="board-row" ng-repeat="row in grid" ng-init="x = $index">
           <div class="space" ng-repeat="square in row track by $index" ng-click="claimForHuman(x, $index)" 
-               ng-class="{red: wins([x, $index])}">
+               ng-class="{red: wins(x, $index)}">
             <p>{{square}}</p>
           </div>
         </div>

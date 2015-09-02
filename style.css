@@ -58,8 +58,14 @@ h3 {
   width: 100%;
   z-index: 1;
   padding: 5px;
-  -webkit-animation: slidedown 300ms ease-out;
-  animation: slidedown 300ms ease-out;
+  -webkit-animation: slidedown 350ms ease-out;
+  animation: slidedown 350ms ease-out;
+}
+
+.prompt.ng-hide {
+  -webkit-transition: top 350ms ease;
+  transition: top 350ms ease;
+  top: -200px;
 }
 
 .selector {
@@ -81,29 +87,10 @@ h3 {
 #choose-symbol .selector {
   margin-top: 15px;
 }
-@-webkit-keyframes grow {
-  from {
-    height: 0px;
-    width: 0px;
-  }
-  to {
-    height: 100px;
-  }
-}
-
-@keyframes grow {
-  from {
-    height: 0px;
-    width: 0px;
-  }
-  to {
-    height: 100px;
-  }
-}
 
 @-webkit-keyframes slidedown {
   from {
-    top: -999px;
+    top: -200px;
   }
   
   50% {
@@ -116,7 +103,7 @@ h3 {
 
 @keyframes slidedown {
   from {
-    top: -999px;
+    top: -200px;
   }
   to {
     top: 5px;

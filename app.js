@@ -2,7 +2,7 @@
 (function () {
   "use strict";
   
-  var app = angular.module('app', ["gameLogic"]);
+  var app = angular.module('app', ["gameLogic", "ngAnimate"]);
   
   app.controller("GameCtrl", ["$scope", "$timeout", "game",
     function ($scope, $timeout, game) {
@@ -16,8 +16,8 @@
         }
       }
       
-      $scope.wins = function (square) {
-        return winningRoute.indexOf(square.join('')) > -1;
+      $scope.wins = function (x, y) {
+        return winningRoute.indexOf([x, y].join('')) > -1;
       };
       
       function humanTurn() {
