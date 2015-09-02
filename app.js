@@ -1,4 +1,4 @@
-/*global angular*/
+/*global angular, console*/
 (function () {
   "use strict";
   
@@ -6,13 +6,19 @@
   
   app.controller("GameCtrl", ["$scope", "$timeout", "game",
     function ($scope, $timeout, game) {
+      var winningRoute = [];
 
       function checkForWinner() {
-        if (game.gameOver() !== false) {
-          $scope.winner = game.gameOver();
+        if (game.gameOver().winner !== false) {
+          $scope.winner = game.gameOver().winner;
+          winningRoute = game.gameOver().winningRoute;
           $scope.playAgain = true;
         }
       }
+      
+      $scope.wins = function (square) {
+        return winningRoute.indexOf(square.join('')) > -1;
+      };
       
       function humanTurn() {
         checkForWinner();
@@ -43,6 +49,7 @@
         game.initialize();
         $scope.grid = game.getGrid();
         $scope.winner = false;
+        winningRoute = [];
         if ($scope.humansTurn === false) {
           computerTurn();
         }

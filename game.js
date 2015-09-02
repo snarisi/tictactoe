@@ -106,7 +106,8 @@
     game.gameOver = function () {
       var x,
         y,
-        answer = false;
+        answer = false,
+        winningRoute = [];
 
       gameRoutes.forEach(function (route) {
         var values = [];
@@ -115,15 +116,24 @@
         });
         if (values.filter(function (value) {return value === game.humanSymbol; }).length === gridSize) {
           answer = "Human wins!";
+          route.forEach(function (square) {
+            winningRoute.push(square.join(''));
+          });
         } else if (values.filter(function (value) {return value === game.computerSymbol; }).length === gridSize) {
           answer = "Computer wins!";
+          route.forEach(function (square) {
+            winningRoute.push(square.join(''));
+          });
         } else if (allSquares.filter(function (square) {return getSquareVal(square) !== " "; })
                    .length === allSquares.length) {
           answer = "It's a draw.";
         }
       });
 
-      return answer;
+      return {
+        "winner": answer,
+        "winningRoute": winningRoute
+      };
     };
 
     game.computerMove = function () {
