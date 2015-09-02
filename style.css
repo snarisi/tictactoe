@@ -1,5 +1,7 @@
 body {
   text-align: center;
+  background-color: #E3F2FD;
+  color: #212121;
 }
 
 h3 {
@@ -9,10 +11,26 @@ h3 {
 .space {
   height: 100px;
   width: 100px;
-  border: solid 1px black;
+  border: solid 3px #F57F17;
   float: left;
   display: inline-block;
   position: relative;
+}
+
+.space:nth-last-child(1) {
+  border-right: none;
+}
+
+.space:first-child {
+  border-left: none;
+}
+
+.board-row:first-child .space {
+  border-top: none;
+}
+
+.board-row:nth-last-child(1) .space {
+  border-bottom: none;
 }
 
 #gameboard {
@@ -24,6 +42,7 @@ h3 {
 #gameboard p {
   font-size: 40px;
   padding-top: 20px;
+  -webkit-transition: opacity 1s;
 }
 
 .boardRow {
@@ -32,16 +51,15 @@ h3 {
 
 .prompt {
   position: absolute;
-  height: 100px;
+  height: 120px;
   top: 5px;
-  background-color: black;
+  background-color: #1976D2;
   color: white;
   width: 100%;
   z-index: 1;
   padding: 5px;
-  animation-name: grow;
-  animation-duration: 300ms;
-  transition: height 1s;
+  -webkit-animation: slidedown 300ms ease-out;
+  animation: slidedown 300ms ease-out;
 }
 
 .selector {
@@ -49,14 +67,29 @@ h3 {
   color: black;
   border-radius: 2px;
   cursor: pointer;
-  margin: 0 5px 0 5px;
+  margin: 0px 5px 0px 5px;
   width: 50px;
-  height: 20px;
+  height: 28px;
   display: inline-block;
   overflow: hidden;
-  transition: all 1s;
 }
 
+.prompt p {
+  font-size: 20px;
+}
+
+#choose-symbol .selector {
+  margin-top: 15px;
+}
+@-webkit-keyframes grow {
+  from {
+    height: 0px;
+    width: 0px;
+  }
+  to {
+    height: 100px;
+  }
+}
 
 @keyframes grow {
   from {
@@ -65,5 +98,27 @@ h3 {
   }
   to {
     height: 100px;
+  }
+}
+
+@-webkit-keyframes slidedown {
+  from {
+    top: -999px;
+  }
+  
+  50% {
+    top: 20px;
+  }
+  to {
+    top: 5px;
+  }
+}
+
+@keyframes slidedown {
+  from {
+    top: -999px;
+  }
+  to {
+    top: 5px;
   }
 }

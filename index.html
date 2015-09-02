@@ -13,13 +13,13 @@
     
     <div ng-controller="GameCtrl">
       
-      <div ng-show="chooseSymbol" class="prompt">
+      <div ng-show="chooseSymbol" class="prompt" id="choose-symbol">
         <h3>Choose your symbol</h3>
         <div ng-click="chooseX()" class="selector"><p>X</p></div>
         <div ng-click="chooseO()" class="selector"><p>O</p></div>
       </div>
       
-      <div ng-show="playAgain" class="prompt">
+      <div ng-show="playAgain" class="prompt" id="play-again">
         <p>{{winner}}</p>
         <h3>Play again?</h3>
         <div ng-click="chooseYourSymbol()" class="selector"><p>Yes</p></div>
@@ -27,7 +27,7 @@
       </div>
       
       <div id="gameboard">
-        <div class="boardRow" ng-repeat="row in grid" ng-init="x = $index">
+        <div class="board-row" ng-repeat="row in grid" ng-init="x = $index">
           <div class="space" ng-repeat="square in row track by $index" ng-click="claimForHuman(x, $index)">
             <p>{{square}}</p>
           </div>
