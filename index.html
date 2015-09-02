@@ -13,34 +13,25 @@
     
     <div ng-controller="GameCtrl">
       
-      <div ng-show="chooseSymbol">
+      <div ng-show="chooseSymbol" class="prompt">
         <h3>Choose your symbol</h3>
-        <p><span ng-click="chooseX()">X  </span><span ng-click="chooseO()">  O</span>
+        <div ng-click="chooseX()" class="selector"><p>X</p></div>
+        <div ng-click="chooseO()" class="selector"><p>O</p></div>
       </div>
       
-      <div id="gameboard" class="container center-block">
-        <div class="row boardRow" ng-repeat="row in grid" ng-init="x = $index">
-          <div class="col-xs-4 space" ng-repeat="square in row track by $index" ng-click="claimForHuman(x, $index)">
-            {{square}}
+      <div ng-show="playAgain" class="prompt">
+        <p>{{winner}}</p>
+        <h3>Play again?</h3>
+        <div ng-click="chooseYourSymbol()" class="selector"><p>Yes</p></div>
+        <div ng-click="playAgain = false" class="selector"><p>No</p></div>
+      </div>
+      
+      <div id="gameboard">
+        <div class="boardRow" ng-repeat="row in grid" ng-init="x = $index">
+          <div class="space" ng-repeat="square in row track by $index" ng-click="claimForHuman(x, $index)">
+            <p>{{square}}</p>
           </div>
         </div>
-      </div>
-    
-      <div class="announcement" ng-show="winner === 'human'">
-        Human Wins
-      </div>
-
-      <div class="announcement" ng-show="winner === 'computer'">
-        Computer Wins
-      </div>
-
-      <div class="announcement" ng-show="winner === 'draw'">
-        Draw
-      </div>
-      
-      <div ng-show="playAgain">
-        <h3>Play again?</h3>
-        <p><span ng-click="chooseYourSymbol()">Yes  </span><span ng-click="playAgain = false">  No</span></p>
       </div>
     </div>
     

@@ -2,13 +2,68 @@ body {
   text-align: center;
 }
 
+h3 {
+  margin-top: 10px;
+}
+
 .space {
   height: 100px;
   width: 100px;
   border: solid 1px black;
+  float: left;
+  display: inline-block;
+  position: relative;
 }
 
 #gameboard {
-  margin: 50px auto;
+  margin: 100px auto;
   width: 300px;
+  cursor: pointer;
+}
+
+#gameboard p {
+  font-size: 40px;
+  padding-top: 20px;
+}
+
+.boardRow {
+  display: table;
+}
+
+.prompt {
+  position: absolute;
+  height: 100px;
+  top: 5px;
+  background-color: black;
+  color: white;
+  width: 100%;
+  z-index: 1;
+  padding: 5px;
+  animation-name: grow;
+  animation-duration: 300ms;
+  transition: height 1s;
+}
+
+.selector {
+  background-color: white;
+  color: black;
+  border-radius: 2px;
+  cursor: pointer;
+  margin: 0 5px 0 5px;
+  width: 50px;
+  height: 20px;
+  display: inline-block;
+  overflow: hidden;
+  transition: all 1s;
+}
+
+
+@keyframes grow {
+  from {
+    height: 0px;
+    width: 0px;
+  }
+  to {
+    height: 100px;
+  }
 }
