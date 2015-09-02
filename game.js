@@ -16,6 +16,22 @@
     
     game.humanSymbol = "";
     
+    function drawGrid(size) {
+      var output = [],
+        row = [],
+        i,
+        j;
+      
+      for (i = 0; i < size; i += 1) {
+        row = [];
+        for (j = 0; j < size; j += 1) {
+          row.push(" ");
+        }
+        output.push(row);
+      }
+      return output;
+    }
+    
     //returns the current value of a square
     function getSquareVal(square) {
       var x = square[0],
@@ -66,11 +82,7 @@
         x,
         y;
       
-      grid = [[" ", " ", " "],
-              [" ", " ", " "],
-              [" ", " ", " "]];
-
-      //set grid when the size is adjustable
+      grid = drawGrid(gridSize);
 
       //map all squares and possible routes
       for (x = 0; x < grid.length; x += 1) {
@@ -102,12 +114,12 @@
           values.push(getSquareVal(square));
         });
         if (values.filter(function (value) {return value === game.humanSymbol; }).length === gridSize) {
-          answer = "human";
+          answer = "Human wins!";
         } else if (values.filter(function (value) {return value === game.computerSymbol; }).length === gridSize) {
-          answer = "computer";
+          answer = "Computer wins!";
         } else if (allSquares.filter(function (square) {return getSquareVal(square) !== " "; })
                    .length === allSquares.length) {
-          answer = "draw";
+          answer = "It's a draw.";
         }
       });
 

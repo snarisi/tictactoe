@@ -24,7 +24,7 @@
       function computerTurn() {
         checkForWinner();
         if (!$scope.winner) {
-          $timeout(function () {game.computerMove(); }, 500).
+          $timeout(function () {game.computerMove(); }, 300).
             then(function () {humanTurn(); });
         }
       }
